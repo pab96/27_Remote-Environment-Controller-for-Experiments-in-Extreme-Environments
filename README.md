@@ -80,7 +80,7 @@ Channel 0-7 will then read voltages from 0...3.3V and give a signal 0...1023 acc
 ## Processor
 We want to be able to possibly track a large number of sensors, take pictures and access a wifi. Doing this with an arduino will require quite a few boards and thus we decided to use an rasperry pi as the central processing unit. This comes at the disadvantage that a pi requires quite a lot of power, however we will overcome this by only switchen the pi on for limited periods.
 First of all set up your pi. If you have never done this follow this quide: https://www.raspberrypi.org/app/uploads/2012/04/quick-start-guide-v2_1.pdf
-
+Carefully follow the instuctions in the file "SettingUpThePi" to set up github on the pi as well as change to correct time zone, make a programm that is executed upon powering the pi which includes the sensor read commands and data transmission commands and setting up the SPI to be able to use the MCP3008. Also check the camera.py file on how to set up the camera.   
 
 
 
