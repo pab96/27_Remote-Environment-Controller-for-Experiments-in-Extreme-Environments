@@ -1,15 +1,20 @@
 # Remote Environment Controller for  Experiments in Extreme Environments
 Observing biological systems, animals, traffic or the evolution of cities in their natural environment requires researchers to travel to remote places. Field trips to these distant locations are often limited in time, expensive, or even dangerous. Here, we build an autonomous environment observer that once installed monitors key parameters that are essential for our research.
-Our aim is to establish a sensor platform that is autonomous (i.e. solar powered) and able to transmit data and receive instructions remotely. Rather than targeting a single application, we build a generic sensor platform that can be used for a wide range of applications and can be easily adapted. Initially we test our system in a student vegetable garden where the sensor platform will be tested and simple simple parameters such as soil moisture, UV intensity, temperature, humidity, camera etc. The main outcome of this project will be a field tested generic sensor platform that can be easily adapted for a wide range of tasks. 
+Our aim is to establish a sensor platform that is autonomous (i.e. solar powered) and able to transmit data and receive instructions remotely. Rather than targeting a single application, we build a generic sensor platform that can be used for a wide range of applications and can be easily adapted. Initially we test our system in a student vegetable garden where the sensor platform will be tested and simple measurements such as soil moisture, UV intensity, temperature, humidity, camera etc. are taken. The main outcome of this project will be a field tested generic sensor platform that can be easily adapted for a wide range of tasks. 
+
+The below figure illustrates the data and power flow of the system:
+![alt text](https://raw.githubusercontent.com/pab96/27_Remote-Environment-Controller-for-Experiments-in-Extreme-Environments/blob/master/LogicStructureRemoteSens.png)
+In short, energy from a solar panel is feed into a battery. The battery powers the main processor (i.e. a raspberry pi). However, to save power the pi is only swtched on periodically by an arduini which requires significantly less enery to run and it can simultaniously monitor the battery voltage to prevent deep battery discharge and only swith on when the battery is sufficiently charged. The pi then read data from the sensors after the signal is converted from analog to digital. Finally the data is transmitted via wifi or the GSM (at locations without wifi) and can then be monitored from anywhere in the world with a PC.
 
 The documentation is structured into several independent sub components which include:
-- Processor
 - Solar Power and Batteries
+- Processor (Raspberry Pi)
 - Use of an external timer circuit to save power
 - Choice of sensors and how to connect them
 - Data transmission
 - Mounting and weather resistant casing
 - Data display and storage
+- Future work
 
 ## Processor
 We want to be able to possibly track a large number of sensors, take pictures and access a wifi. Doing this with an arduino will require quite a few boards and thus we decided to use an rasperry pi as the central processing unit. This comes at the disadvantage that a pi requires quite a lot of power, however we will overcome this by only switchen the pi on for limited periods.
