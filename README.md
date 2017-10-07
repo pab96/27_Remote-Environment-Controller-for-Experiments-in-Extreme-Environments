@@ -16,6 +16,16 @@ The documentation is structured into several independent sub components which in
 - Data display and storage
 - Future work
 
+|  Component | Component Details |
+| --- | --- |
+| Solar panel and 12V battery charger | (RS Stock No.706-7918) |
+| Battery | 12V Lead Acid Battery, 1.2Ah (RS Stock No.614-2447) |
+| Arduino |Arduino Pro Mini |
+| Raspberry Pi |Raspberry Pi 2B |
+| Camera |Raspberry Pi Camera V2 Camera Module (RS Stock No.913-2664) |
+| Power MOSFET |N-channel MOSFET, 5.6 A, 100 V (RS Stock No.708-5134) |
+
+
 ## Processor
 We want to be able to possibly track a large number of sensors, take pictures and access a wifi. Doing this with an arduino will require quite a few boards and thus we decided to use an rasperry pi as the central processing unit. This comes at the disadvantage that a pi requires quite a lot of power, however we will overcome this by only switchen the pi on for limited periods.
 First of all set up your pi. If you have never done this follow this quide: https://www.raspberrypi.org/app/uploads/2012/04/quick-start-guide-v2_1.pdf
