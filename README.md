@@ -69,8 +69,8 @@ Considering that the pi could draw up to 1A, we decided to use a lead acid car b
 ![alt text](https://github.com/pab96/27_Remote-Environment-Controller-for-Experiments-in-Extreme-Environments/blob/master/SolarPanelBeforeAndAfterDismount.png)
 Here is a very rough estimation of how much energy we get from the panel and how much we need. 
 * On an overcast September day at 10am the solar panel yielded about 20mA and about 20V i.e. 400mW. In winter we might only get 5h daylight so let's say we can generate 2Wh/day. 
-* The arduino pro mini consumers (let's be consverative) 0.1mA @ 9V -> 0.9mW *24h -> 21.6mWh
-* The raspberry pi with sensors consumes about 500mA @ 5V. The voltage converter is probaply very innefficient let's guess 50%. The pi is only switched on for 1min every hour. So in total 0.5*5*1/0.5*24/60 =2Wh/day
+* The arduino pro mini consumers (let's be consverative) 0.1mA @ 9V -> 0.9mW x 24h -> 21.6mWh
+* The raspberry pi with sensors consumes about 500mA @ 5V. The voltage converter is probaply very innefficient let's guess 50%. The pi is only switched on for 1min every hour. So in total 0.5x5x1/0.5x24/60 =2Wh/day
 So we consume ~2Wh/day and on a cloudy day in winter produce 2Wh/day. That means the small solar panel should just be enough to get over the winter. 
 
 ## Multiplexing and analogue to digital conversion (ADC):
