@@ -21,9 +21,20 @@ The documentation is structured into several independent sub components which in
 | Solar panel and 12V battery charger | (RS Stock No.706-7918) |
 | Battery | 12V Lead Acid Battery, 1.2Ah (RS Stock No.614-2447) |
 | Arduino |Arduino Pro Mini |
+|Arduino Uno with USB connection cable| Arduino Uno
 | Raspberry Pi |Raspberry Pi 2B |
+|SD card|16GB Micro SD Card with NOOBS for Raspberry Pi (Onecall Order Code:SC14027 http://onecall.farnell.com/transcend/tsraspi10-16g/memory-microsd-16gb-noobs/dp/SC14027)|
+|Voltage Converter| Car battery 12V to 5V USB converter (RS Stock No.814-6261)|
+| USB Wifi Adapter| (RS Stock No.760-3625, http://uk.rs-online.com/web/p/wireless-adapters/7603625/)
 | Camera |Raspberry Pi Camera V2 Camera Module (RS Stock No.913-2664) |
 | Power MOSFET |N-channel MOSFET, 5.6 A, 100 V (RS Stock No.708-5134) |
+| Soil Moisture Sensor|(Sparkfun SEN-13637 (https://www.sparkfun.com/products/13637)) |
+| UV Sensor |(Sparkfun SEN-12705 https://www.sparkfun.com/products/retired/12705 |
+| Air Contaminants Gas Sensor |Figaro TGS2600-B00 (RS Stock No.538-9960 ) |
+| Temperature Sensor |Texas Instruments LM35DZ/NOPB (RS Stock No.922-4836) |
+| Light Dependent Resistor| (RS Stock No.914-6710)|
+
+Additionally mouse, keyboard, PC screen with VGA (or with VGA/HDMI converter), some rapit 
 
 
 ## Processor
