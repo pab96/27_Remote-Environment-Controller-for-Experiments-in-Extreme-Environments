@@ -53,6 +53,9 @@ First of all set up your pi. If you have never done this follow this quide: http
 
 
 ## Solar Power and Batteries:
+Considering that the pi could draw up to 1A, we decided to use a lead acid car battery. These are fairly cheap and also have a long lifetime and can be recharged. The solar panel we used here is very handy because it comes directly with a 12V lead acid battery charger.
+### Add solar Panel pictures ####
+
 
 ## Power Management
 Data recording is only required every hour or so. In the intervalls in between the Pi can be switched off which saves a lot of power.   The pi sleep mode requires too much power and even if the pi is off the sensors would drain power from the pi. Thus, an external timer device is used which cuts the power to the pi and only switches on peridiotically. As external timer we decided to use an Arduino pro mini, because it can be modifyed to use very lowe current (i.e. a few nA). Here are the tricks on reducing arduino power consumption and how to run the periodic switching program. Additionally we added a battery voltage sensor to check that is is save to switch on the pi i.e. if a lead acid battery is run below 11.8V it damages the battery therefore deep discharge should be avoided.
