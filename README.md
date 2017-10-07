@@ -68,22 +68,22 @@ The 9V battery is powering the arduino pro mini through the raw pin which can ta
 Considering that the pi could draw up to 1A, we decided to use a lead acid car battery. These are fairly cheap, have a long lifetime, can be recharged and a large current can be drawn from them. The solar panel we used here is very handy because it comes directly with a 12V lead acid battery charger. Below is a picture of this solar panel module connected to the battery. Since we integrated the solar panel on a bird house, we cut off all the unesscary plastic of the solar panel kit and attached it to the roof of the bird house. 
 ![alt text](https://github.com/pab96/27_Remote-Environment-Controller-for-Experiments-in-Extreme-Environments/blob/master/SolarPanelBeforeAndAfterDismount.png)
 Here is a very rough estimation of how much energy we get from the panel and how much we need. 
--On an overcast September day at 10am the solar panel yielded about 20mA and about 20V i.e. 400mW. In winter we might only get 5h daylight so let's say we can generate 2Wh/day. 
--The arduino pro mini consumers (let's be consverative) 0.1mA @ 9V -> 0.9mW *24h -> 21.6mWh
--The raspberry pi with sensors consumes about 500mA @ 5V. The voltage converter is probaply very innefficient let's guess 50%. The pi is only switched on for 1min every hour. So in total 0.5*5*1/0.5*24/60 =2Wh/day
+* On an overcast September day at 10am the solar panel yielded about 20mA and about 20V i.e. 400mW. In winter we might only get 5h daylight so let's say we can generate 2Wh/day. 
+* The arduino pro mini consumers (let's be consverative) 0.1mA @ 9V -> 0.9mW *24h -> 21.6mWh
+* The raspberry pi with sensors consumes about 500mA @ 5V. The voltage converter is probaply very innefficient let's guess 50%. The pi is only switched on for 1min every hour. So in total 0.5*5*1/0.5*24/60 =2Wh/day
 So we consume ~2Wh/day and on a cloudy day in winter produce 2Wh/day. That means the small solar panel should just be enough to get over the winter. 
 
 ## Multiplexing and analogue to digital conversion (ADC):
 More info on setting up MCP3008 [here:](https://learn.adafruit.com/raspberry-pi-analog-to-digital-converters/mcp3008)
 Connect MCP3008 as follows:
-MCP3008 VDD to Raspberry Pi 3.3V
-MCP3008 VREF to Raspberry Pi 3.3V
-MCP3008 AGND to Raspberry Pi GND
-MCP3008 DGND to Raspberry Pi GND
-MCP3008 CLK to Raspberry Pi pin 18
-MCP3008 DOUT to Raspberry Pi pin 23
-MCP3008 DIN to Raspberry Pi pin 24
-MCP3008 CS/SHDN to Raspberry Pi pin 25
+* MCP3008 VDD to Raspberry Pi 3.3V
+* MCP3008 VREF to Raspberry Pi 3.3V
+* MCP3008 AGND to Raspberry Pi GND
+* MCP3008 DGND to Raspberry Pi GND
+* MCP3008 CLK to Raspberry Pi pin 18
+* MCP3008 DOUT to Raspberry Pi pin 23
+* MCP3008 DIN to Raspberry Pi pin 24
+* MCP3008 CS/SHDN to Raspberry Pi pin 25
 CHannel 0-7 will then read voltages from 0...3.3V and give a signal 0...1023 accordingly 
 
 
