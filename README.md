@@ -7,14 +7,14 @@ The below figure illustrates the data and power flow of the system:
 In short, energy from a solar panel is feed into a battery. The battery powers the main processor (i.e. a raspberry pi). However, to save power the pi is only swtched on periodically by an arduini which requires significantly less enery to run and it can simultaniously monitor the battery voltage to prevent deep battery discharge and only swith on when the battery is sufficiently charged. The pi then read data from the sensors after the signal is converted from analog to digital. Finally the data is transmitted via wifi or the GSM (at locations without wifi) and can then be monitored from anywhere in the world with a PC.
 
 The documentation is structured into several independent sub components which include:
-- Solar Power and Batteries
-- Processor (Raspberry Pi)
-- Use of an external timer circuit to save power
-- Choice of sensors and how to connect them
-- Data transmission
-- Mounting and weather resistant casing
-- Data display and storage
-- Future work
+* Solar Power and Batteries
+* Processor (Raspberry Pi)
+* Use of an external timer circuit to save power
+* Choice of sensors and how to connect them
+* Data transmission
+* Mounting and weather resistant casing
+* Data display and storage
+* Future work
 
 ## What you need:
 |  Component | Component Details |
@@ -44,16 +44,7 @@ The documentation is structured into several independent sub components which in
 |40 Pin Rainbow Color Ribbon Cable for Raspberry Pi||
 |Male andFemale Single Row Square Pin Header Strip||
 
-Additionally mouse, keyboard, PC screen with VGA (or with VGA/HDMI converter), breadboard, lots of wires, a multimeter is always useful, soldering board, soldering wire and a soldering iron, silicone or super glue, screws and nuts nuts, screwdrivers, a drill. 
-
-## Processor
-We want to be able to possibly track a large number of sensors, take pictures and access a wifi. Doing this with an arduino will require quite a few boards and thus we decided to use an rasperry pi as the central processing unit. This comes at the disadvantage that a pi requires quite a lot of power, however we will overcome this by only switchen the pi on for limited periods.
-First of all set up your pi. If you have never done this follow this quide: https://www.raspberrypi.org/app/uploads/2012/04/quick-start-guide-v2_1.pdf
-
-
-
- 
-
+Additionally mouse, keyboard, PC screen with VGA (or with VGA/HDMI converter), breadboard, lots of wires, a multimeter is always useful, soldering board, soldering wire and a soldering iron, silicone or super glue, screws and nuts, screwdrivers, a drill. 
 
 ## Power Management
 Data recording is only required every hour or so. In the intervalls in between the Pi can be switched off which saves a lot of power.   The pi sleep mode requires too much power and even if the pi is off the sensors would drain power from the pi. Thus, an external timer device is used which cuts the power to the pi and only switches on peridiotically. As external timer we decided to use an Arduino pro mini, because it can be modifyed to use very lowe current (i.e. a few nA). Here are the tricks on reducing arduino power consumption and how to run the periodic switching program. Additionally we added a battery voltage sensor to check that is is save to switch on the pi i.e. if a lead acid battery is run below 11.8V it damages the battery therefore deep discharge should be avoided.
@@ -61,7 +52,7 @@ Data recording is only required every hour or so. In the intervalls in between t
 Using the arduino pro mini First install Arduino IDE. You can use an FTDI device to programm the mini. I tried with the one from sparkfun but no matter what I did my PC wouldn't recognice the driver. So I gave up and found a much better otion instead! You can programm the arduino pro mini with a normal Arduino Uno (the one where you can take out the ATMEGA328P), this worked first time I tried! So I recommend you use that option it also spares you from buying an FTDI, rather buy an arduino uno if you don't have one, I'm sure you'll find use for that later. [Here](http://www.instructables.com/id/Program-Arduino-Pro-Mini-Using-Arduino-Uno/) is an excellent tutorial on how to programm the arduino pro mini using the arduino uno. In short you need to take out the ATMEGA328P from the Uno, then connect Uno ground to pro mini ground, the Uno 5V pin to VCC on the pro mini and the Rx and Tx pins as well as the reset pin from Uno to the pro mini. Then go to the Arduino IDE -> Tools-> Board -> Arduino Pro Mini and make sure you have the corret port enabled. Then as usual just upload the program to the Uno which will then go to the pro mini and it works, MAGIC! (Sometimes still PC does not recognise port, try deplug usb with arduino and just uploading it several times at some stage it will work). Before you upload the program arduinoProMiniPowerTimer to the arduino you need to download the [LowPower.h library](https://github.com/rocketscream/Low-Power) i.e. download the whole folder and save it on your disk (i.e. C:\Program Files (x86)\Arduino\libraries). For the low power settings we are following [this guide:](http://www.home-automation-community.com/arduino-low-power-how-to-run-atmega328p-for-a-year-on-coin-cell-battery). I.e. to sigificantly reduce power consumption of the pro mini we use the low power command to put the arduino to sleep. The command LowPower.powerDown(SLEEP_8S, ADC_OFF, BOD_OFF) sets the arduino to sleep, max time for this is 8 sec after which the arduino just switches on for a couple of mili seconds and goes to sleep again this is reapeated until 1h has passed. Second the power LED of the arduino pro mini was scractched out with a small screw driver. During the sleep interval the arduino draws 0.06mA from the 9V battery and during the on times it draws 18mA. The on time is really just a few milli seconds so on average the current drawn is close to the 0.06mA. The arduino pro mini is also measuring the lead acid battery voltage through a series of large resistors (to keep the current and power consumer by this low) that devide the voltage of the battery into something between 0 and 3.3V such that both the pi and the arduino can read it. If the lead acid batery volatge drops below 11.5V the power to the pi is not switched on to prevent a deep discharge of the lead acid battery.
 
 The below figure shows how to connect everything up.  
-![alt text](https://github.com/pab96/27_Remote-Environment-Controller-for-Experiments-in-Extreme-Environments/blob/master/arduinoPowerTimer.png)
+![alt text](https://github.com/pab96/27_Remote-Environment-Controller-for-Experiments-in-Extreme-Environments/blob/master/GardenObserverAll_v2_schemMod.png)
 The 9V battery is powering the arduino pro mini through the raw pin which can take volatges up to 12V but no more (I tried connecting the 12V car battery to the arduino raw pin... the result was SMOKY! #NotAGoodIdea)! A simple voltage devider was made with a 5.1MOhm resistor and three 100kOhm resistors and a 1MOhm resistor such that R_1=5.1Mohm and R_2=1M+3*100k=1.3Mohm ->From measuring the voltage over R_2 the battery voltage can be calculated V_battery=V_measured*(R_1+R_2)/R_2. This devides the 12V into something the arduino pro can read withits analogue pins. The programm then switches the power mosfet on whenever 1h has passed and the battery voltage is above 11.5V. Switching the power mosfet on means that the current can flow from the battery battery through the pi to the battery negative. It's important to hook the mosfet up to the negative leg of the battery and not the positive as it would not work on the positive leg. 
 
 ## Solar Power and Batteries:
@@ -74,8 +65,8 @@ Here is a very rough estimation of how much energy we get from the panel and how
 So we consume ~2Wh/day and on a cloudy day in winter produce 2Wh/day. That means the small solar panel should just be enough to get over the winter. 
 
 ## Multiplexing and analogue to digital conversion (ADC):
-More info on setting up MCP3008 [here:](https://learn.adafruit.com/raspberry-pi-analog-to-digital-converters/mcp3008)
-Connect MCP3008 as follows:
+The pi can only input digital data, however the sensor data is analog. Therefore we use a MCP3008 analog to digital converter (ADC) to supply the pi with the data in the correct format. The MCP3008 has 8 input channels, thus 8 sensors can be connected to it and read out by the pi. 
+Connect MCP3008 as follows (More info on setting up MCP3008 [here:](https://learn.adafruit.com/raspberry-pi-analog-to-digital-converters/mcp3008)):
 * MCP3008 VDD to Raspberry Pi 3.3V
 * MCP3008 VREF to Raspberry Pi 3.3V
 * MCP3008 AGND to Raspberry Pi GND
@@ -84,7 +75,12 @@ Connect MCP3008 as follows:
 * MCP3008 DOUT to Raspberry Pi pin 23
 * MCP3008 DIN to Raspberry Pi pin 24
 * MCP3008 CS/SHDN to Raspberry Pi pin 25
-CHannel 0-7 will then read voltages from 0...3.3V and give a signal 0...1023 accordingly 
+Channel 0-7 will then read voltages from 0...3.3V and give a signal 0...1023 accordingly.
+
+## Processor
+We want to be able to possibly track a large number of sensors, take pictures and access a wifi. Doing this with an arduino will require quite a few boards and thus we decided to use an rasperry pi as the central processing unit. This comes at the disadvantage that a pi requires quite a lot of power, however we will overcome this by only switchen the pi on for limited periods.
+First of all set up your pi. If you have never done this follow this quide: https://www.raspberrypi.org/app/uploads/2012/04/quick-start-guide-v2_1.pdf
+
 
 
 
