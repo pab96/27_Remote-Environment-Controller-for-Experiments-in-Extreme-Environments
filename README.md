@@ -16,13 +16,15 @@ The documentation is structured into several independent sub components which in
 - Data display and storage
 - Future work
 
+## What you need:
 |  Component | Component Details |
 | --- | --- |
 | Solar panel and 12V battery charger | (RS Stock No.706-7918) |
 | Battery | 12V Lead Acid Battery, 1.2Ah (RS Stock No.614-2447) |
 | Arduino |Arduino Pro Mini |
 |Arduino Uno with USB connection cable| Arduino Uno
-| Raspberry Pi |Raspberry Pi 2B |
+| Raspberry Pi and power cable |Raspberry Pi 2B |
+|USB to usb micro cable| |
 |SD card|16GB Micro SD Card with NOOBS for Raspberry Pi (Onecall Order Code:SC14027 http://onecall.farnell.com/transcend/tsraspi10-16g/memory-microsd-16gb-noobs/dp/SC14027)|
 |Voltage Converter| Car battery 12V to 5V USB converter (RS Stock No.814-6261)|
 | USB Wifi Adapter| (RS Stock No.760-3625, http://uk.rs-online.com/web/p/wireless-adapters/7603625/)
@@ -33,26 +35,24 @@ The documentation is structured into several independent sub components which in
 | Air Contaminants Gas Sensor |Figaro TGS2600-B00 (RS Stock No.538-9960 ) |
 | Temperature Sensor |Texas Instruments LM35DZ/NOPB (RS Stock No.922-4836) |
 | Light Dependent Resistor| (RS Stock No.914-6710)|
+|5x 1kOhm Resistor| |
+|5.1 MOhm Resistor||
+|3x 100 kOhm Resistor||
+|1 MOhm Resistor||
+|9V Battery||
+|Bird House||
+|40 Pin Rainbow Color Ribbon Cable for Raspberry Pi||
+|Male andFemale Single Row Square Pin Header Strip||
 
-Additionally mouse, keyboard, PC screen with VGA (or with VGA/HDMI converter), some rapit 
-
+Additionally mouse, keyboard, PC screen with VGA (or with VGA/HDMI converter), breadboard, lots of wires, a multimeter is always useful, soldering board, soldering wire and a soldering iron, silicone or super glue, screws and nuts nuts, screwdrivers, a drill. 
 
 ## Processor
 We want to be able to possibly track a large number of sensors, take pictures and access a wifi. Doing this with an arduino will require quite a few boards and thus we decided to use an rasperry pi as the central processing unit. This comes at the disadvantage that a pi requires quite a lot of power, however we will overcome this by only switchen the pi on for limited periods.
 First of all set up your pi. If you have never done this follow this quide: https://www.raspberrypi.org/app/uploads/2012/04/quick-start-guide-v2_1.pdf
 
 
-### Components:
-- A raspberry pi e.g. raspberry pi 2B
-- For programming the pi you will need a keyboard and mouse, a screen (possibly a HDMI to VGA adapted depending on your screen)
-- A SD card with the noobs operating system
-- A wifi dongle
-- power adapter
 
 ## Solar Power and Batteries:
-
-
-
 
 Using a timer:
 Data recording is only required every hour or so. In the intervalls in between Pi can be switched off which saves a lot of power. Power consumption is cruicial in tis project if the Pi is powered by a battery and a solar panel. So the idea is that the Pi only swictehs on every hour read the sensors and then switch off gain. The sleep mode requires too much power, thus an external timer device is used. This timer is described here:
